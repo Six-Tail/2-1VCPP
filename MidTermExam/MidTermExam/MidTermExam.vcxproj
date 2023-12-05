@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7294f9ac-b156-4505-a8f6-1e4f7b29f3aa}</ProjectGuid>
-    <RootNamespace>MiddleTest</RootNamespace>
+    <ProjectGuid>{a3fa9d16-706f-420e-a718-bb1d6d779bc5}</ProjectGuid>
+    <RootNamespace>MidTermExam</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -128,21 +128,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
-    <ClInclude Include="MiddleTest.h" />
+    <ClInclude Include="MidTermExam.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MiddleTest.cpp" />
+    <ClCompile Include="MidTermExam.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="MiddleTest.rc" />
+    <ResourceCompile Include="MidTermExam.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Box.PNG">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="MiddleTest.ico" />
+    <Image Include="MidTermExam.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

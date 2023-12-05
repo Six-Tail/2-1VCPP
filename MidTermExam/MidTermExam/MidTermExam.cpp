@@ -8,6 +8,7 @@ HBRUSH hBackgroundBrush; // 배경색 브러시
 HPEN hBorderPen;        // 테두리 펜
 
 bool isBoxVisible = false;
+bool isRyanVisible = false;
 bool isPressSpace = false;
 
 // 버튼 식별자
@@ -83,7 +84,7 @@ void drawbonobono(HWND hWnd, HDC hdc) {
         Ellipse(hdc, (int)(270 * scale) + moveRight, (int)(290 * scale) + moveDown, (int)(340 * scale) + moveRight, (int)(345 * scale) + moveDown); // 코왼쪽
         Ellipse(hdc, (int)(340 * scale) + moveRight, (int)(290 * scale) + moveDown, (int)(410 * scale) + moveRight, (int)(345 * scale) + moveDown); // 코 오른쪽
         SelectObject(hdc, black);
-        
+
         Ellipse(hdc, (int)(320 * scale) + moveRight, (int)(275 * scale) + moveDown, (int)(365 * scale) + moveRight, (int)(315 * scale) + moveDown); // 코 
 
         MoveToEx(hdc, (int)(185 * scale) + moveRight, (int)(240 * scale) + moveDown, NULL); // 왼쪽 눈
@@ -117,6 +118,52 @@ void drawbonobono(HWND hWnd, HDC hdc) {
 
 }
 
+void drawryan(HWND hWnd, HDC hdc) {
+    RECT circle;
+    GetClientRect(hWnd, &circle);
+
+    int moveRight = 110; //오른쪽으로 이동할 픽셀 수
+    int moveDown = 25; // 아래로 이동할 픽셀 수
+    float scale = 0.8;
+    if (isRyanVisible) {
+        HPEN hPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 0));
+        HPEN hOldPen = (HPEN)SelectObject(hdc, hPen);
+        HBRUSH face = CreateSolidBrush(RGB(255, 200, 15));
+        HBRUSH black = CreateSolidBrush(RGB(0, 0, 0));
+        HBRUSH white = CreateSolidBrush(RGB(255, 255, 255));
+
+        SelectObject(hdc, face);
+        Ellipse(hdc, (int)(150 * scale) + moveRight, (int)(85 * scale) + moveDown, (int)(320 * scale) + moveRight, (int)(250 * scale) + moveDown);// 왼쪽귀
+        Ellipse(hdc, (int)(365 * scale) + moveRight, (int)(85 * scale) + moveDown, (int)(535 * scale) + moveRight, (int)(250 * scale) + moveDown);// 오른쪽귀
+        Ellipse(hdc, (int)(150 * scale) + moveRight, (int)(100 * scale) + moveDown, (int)(535 * scale) + moveRight, (int)(458 * scale) + moveDown);// 얼굴
+        SelectObject(hdc, white);
+        Ellipse(hdc, (int)(270 * scale) + moveRight, (int)(290 * scale) + moveDown, (int)(340 * scale) + moveRight, (int)(345 * scale) + moveDown); // 코왼쪽
+        Ellipse(hdc, (int)(340 * scale) + moveRight, (int)(290 * scale) + moveDown, (int)(410 * scale) + moveRight, (int)(345 * scale) + moveDown); // 코 오른쪽
+        SelectObject(hdc, black);
+        Ellipse(hdc, (int)(235 * scale) + moveRight, (int)(240 * scale) + moveDown, (int)(255 * scale) + moveRight, (int)(260 * scale) + moveDown); // 왼쪽눈
+        Ellipse(hdc, (int)(430 * scale) + moveRight, (int)(240 * scale) + moveDown, (int)(450 * scale) + moveRight, (int)(260 * scale) + moveDown); // 오른쪽눈
+        SelectObject(hdc, black);
+        MoveToEx(hdc, (int)(210 * scale) + moveRight, (int)(207 * scale) + moveDown, NULL); // 왼쪽 눈썹1
+        LineTo(hdc, (int)(280 * scale) + moveRight, (int)(207 * scale) + moveDown); //
+        MoveToEx(hdc, (int)(210 * scale) + moveRight, (int)(210 * scale) + moveDown, NULL); // 왼쪽 눈썹2
+        LineTo(hdc, (int)(280 * scale) + moveRight, (int)(210 * scale) + moveDown); //
+        MoveToEx(hdc, (int)(210 * scale) + moveRight, (int)(214 * scale) + moveDown, NULL); // 왼쪽 눈썹3
+        LineTo(hdc, (int)(280 * scale) + moveRight, (int)(214 * scale) + moveDown); //
+        MoveToEx(hdc, (int)(480 * scale) + moveRight, (int)(207 * scale) + moveDown, NULL); // 오른쪽 눈썹1
+        LineTo(hdc, (int)(410 * scale) + moveRight, (int)(207 * scale) + moveDown); //
+        MoveToEx(hdc, (int)(480 * scale) + moveRight, (int)(210 * scale) + moveDown, NULL); // 오른쪽 눈썹2
+        LineTo(hdc, (int)(410 * scale) + moveRight, (int)(210 * scale) + moveDown); //
+        MoveToEx(hdc, (int)(480 * scale) + moveRight, (int)(214 * scale) + moveDown, NULL); // 오른쪽 눈썹3
+        LineTo(hdc, (int)(410 * scale) + moveRight, (int)(214 * scale) + moveDown); //
+
+
+        DeleteObject(face);
+        DeleteObject(black);
+        DeleteObject(white);
+        SelectObject(hdc, hOldPen); // 이전 펜 선택
+        DeleteObject(hPen); // 펜 삭제
+    }
+}
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -288,6 +335,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         DeleteObject(hInnerBrush);
         DeleteObject(hInnerPen);
 
+        drawryan(hWnd, hdc);
         drawbonobono(hWnd, hdc);
         EndPaint(hWnd, &ps);
         return 0;
@@ -314,8 +362,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 InvalidateRect(hWnd, NULL, TRUE);
                 break;
             case BUTTON_ID_4:
-                // 버튼 4 클릭 처리
-                MessageBox(hWnd, L"Ryan Clicked", L"Button Clicked", MB_OK);
+                // 버튼 4 클릭 처리 (Ryan)
+                isRyanVisible = !isRyanVisible; // 숨겨진 상태에서 라이언을 그립니다.
+                InvalidateRect(hWnd, NULL, TRUE);
                 break;
             case BUTTON_ID_5:
                 // 버튼 5 클릭 처리

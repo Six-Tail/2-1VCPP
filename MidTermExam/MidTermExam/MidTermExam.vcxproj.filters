@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="리소스 파일\My image">
-      <UniqueIdentifier>{41259bb0-8026-4a5c-a732-a96341d630a1}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -27,17 +24,17 @@
     <ClInclude Include="Resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MiddleTest.h">
+    <ClInclude Include="MidTermExam.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MiddleTest.cpp">
+    <ClCompile Include="MidTermExam.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="MiddleTest.rc">
+    <ResourceCompile Include="MidTermExam.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -45,11 +42,8 @@
     <Image Include="small.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="MiddleTest.ico">
+    <Image Include="MidTermExam.ico">
       <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Box.PNG">
-      <Filter>리소스 파일\My image</Filter>
     </Image>
   </ItemGroup>
 </Project>
